@@ -28,7 +28,9 @@ export default {
   ],
 
   router: {
-    middleware: ["clearValidationErrors"]
+    middleware: [
+      "clearValidationErrors"
+    ]
   },
 
   /*
@@ -78,7 +80,7 @@ export default {
       local: {
         endpoints: {
           login: {
-            url: 'login', 
+            url: '/login', 
             method: 'post', 
             propertyName: 'meta.token'
           },
@@ -100,7 +102,7 @@ export default {
     }
   },
   axios: {
-    baseURL: 'http://localhost:8000/api/'
+    baseURL: 'http://localhost:8000/api'
   },
   /*
   ** Build configuration

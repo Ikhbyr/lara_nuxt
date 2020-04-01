@@ -49,6 +49,7 @@
 import VeeValidate from 'vee-validate'
 
   export default {
+    middleware: ['guest'],
     data () {
       return {
         namespaced: true,
@@ -82,7 +83,12 @@ import VeeValidate from 'vee-validate'
         await this.$auth.loginWith("local", {
           data: this.form
         })
-        this.$router.push('/')
+        .then(res=>{
+          this.$router.push({
+            path: this.$route.query.redirect || "/dashboard"
+          })
+        })
+        .catch(console.log("error"));
       }
     },
   }
