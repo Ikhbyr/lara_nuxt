@@ -47,6 +47,7 @@
 </template>
 <script>
 import VeeValidate from 'vee-validate'
+import Form from 'vform'
 
   export default {
     middleware: ['guest'],
@@ -64,10 +65,11 @@ import VeeValidate from 'vee-validate'
           { text: 'State 7' },
         ],
         email: '',
-        form: {
-          email: '',
-          password: '',
-        },
+        form: new Form({
+          email: 'ikhbayar42@gmail.com',
+          password: 'ikhee0711'
+        }),
+        remember: false,
         name: '',
         checkbox: null
       }
@@ -80,15 +82,25 @@ import VeeValidate from 'vee-validate'
         this.checkbox = null
       },
       async submit () {
-        await this.$auth.loginWith("local", {
-          data: this.form
+        let data
+        try {
+          const response = await this.form.post('/login')
+          data = response.data
+        } catch (e) {
+          return
+        }
+
+          // Save the token.
+        this.$store.dispatch('auth/saveToken', {
+          token: data.meta.token,
+          remember: this.remember
         })
-        .then(res=>{
-          this.$router.push({
-            path: this.$route.query.redirect || "/dashboard"
-          })
+
+        await this.$store.dispatch('auth/fetchUser')
+        .then (res => {
+          return this.$router.push('/dashboard')
         })
-        .catch(console.log("error"));
+        // this.$router.push(this.$router.query.redirect ? this.$router.query.redirect : '/');
       }
     },
   }

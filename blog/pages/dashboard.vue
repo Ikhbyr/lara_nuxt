@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>
-            User Profile
+            User Profile {{authenticated}}
         </h2>
     </div>
 </template>

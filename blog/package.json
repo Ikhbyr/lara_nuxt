@@ -1,7 +1,7 @@
 {
-  "name": "blog",
+  "name": "school",
   "version": "1.0.0",
-  "description": "My dazzling Nuxt.js project",
+  "description": "LOLO",
   "author": "Ikhee",
   "private": true,
   "scripts": {
@@ -11,13 +11,15 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@mdi/js": "^4.7.95",
-    "@nuxtjs/auth": "^4.8.4",
-    "@nuxtjs/axios": "^5.9.0",
-    "nuxt": "^2.0.0",
-    "vee-validate": "^3.2.0"
+    "@mdi/js": "^4.9.95",
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.11.0",
+    "nuxt": "^2.13.2",
+    "sweetalert2": "^8.19.0",
+    "vee-validate": "^3.3.6",
+    "vform": "^1.0.1"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.0.0"
+    "@nuxtjs/vuetify": "^1.11.2"
   }
 }

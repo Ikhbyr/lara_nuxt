@@ -1,13 +1,23 @@
 import colors from 'vuetify/es5/util/colors'
+require('dotenv').config()
+const { join } = require('path')
+const { copySync, removeSync } = require('fs-extra')
 
 export default {
   mode: 'universal',
   /*
   ** Headers of the page
   */
+  env: {
+    apiUrl: process.env.API_URL || process.env.APP_URL + '/api',
+    appName: process.env.APP_NAME || 'Laravel Nuxt',
+    appLocale: process.env.APP_LOCALE || 'en',
+    githubAuth: !!process.env.GITHUB_CLIENT_ID
+  },
+
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    title: process.env.APP_NAME,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -52,7 +62,6 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
   ],
   /*
   ** vuetify module configuration
@@ -99,10 +108,13 @@ export default {
     redirect: {
       login: '/auth/login',
       home: '/'
-    }
+    },
+    plugins: [
+      './plugins/authUrl'
+    ]
   },
   axios: {
-    baseURL: 'http://localhost:8000/api'
+    baseURL: process.env.APP_URL + '/api'
   },
   /*
   ** Build configuration
